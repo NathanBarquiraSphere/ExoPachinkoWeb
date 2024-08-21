@@ -1,9 +1,10 @@
 import * as flatbuffers from 'flatbuffers';
-import { TypeWrapper } from '../schema/wsschema/type-wrapper';
-import { Message } from '../schema/wsschema/message';
-import { PingServerRequest } from '../schema/wsschema/ping-server-request';
+import { TypeWrapper } from '../schema/epschema/type-wrapper';
+import { Message } from '../schema/epschema/message';
+import { PingServerRequest } from '../schema/epschema/ping-server-request';
 import { EventEmitter } from 'events';
-import { ClientLoginResponse } from '../schema/wsschema/client-login-response';
+import { ClientLoginResponse } from '../schema/epschema/client-login-response';
+import { LinearColorObject } from '../objects/LinearColorObject';
 
 export class BaseNetworkingManager extends EventEmitter {
 

@@ -1,13 +1,11 @@
 import * as flatbuffers from 'flatbuffers';
-import { ShapeRequest } from './../schema/wsschema/shape-request';
-import { TypeWrapper } from '../schema/wsschema/type-wrapper';
-import { Message } from '../schema/wsschema/message';
-import { PingServerRequest } from '../schema/wsschema/ping-server-request';
-import { ClientLoginResponse } from '../schema/wsschema/client-login-response';
-import { PhaseResponse } from '../schema/wsschema/phase-response';
-import { PhaseEnums } from '../schema/wsschema/phase-enums'
-import { PlayerNameRequest } from '../schema/wsschema/player-name-request';
-import { BaseNetworkingManager } from './BaseNetworkingManager';
+import { TypeWrapper } from '../schema/epschema/type-wrapper';
+import { Message } from '../schema/epschema/message';
+import { BaseNetworkingManager } from './BaseNetworkingManager'
+import { LinearColorRequest } from '../schema/epschema/linear-color-request';
+import { LinearColorResponse } from '../schema/epschema/linear-color-response';
+import { LinearColor } from '../schema/epschema/linear-color';
+import { LinearColorObject } from '../objects/LinearColorObject';
 
 // similar to ENET client overrides.
 // just create the senders / message handlers here.
@@ -15,59 +13,20 @@ export class NetworkingManager extends BaseNetworkingManager {
 
 
     // START SENDERS
-    public sendPlayerNameRequest = (inName: string) =>
+    sendLinearColorResponse(inLinearColor: LinearColorObject): void
     {
         const builder = new flatbuffers.Builder(256);
 
-        const builtString = builder.createString(inName);
+        const linearColorOffset = LinearColor.createLinearColor(builder, inLinearColor.red, inLinearColor.green, inLinearColor.blue, inLinearColor.alpha);
 
-        PlayerNameRequest.startPlayerNameRequest(builder);
-        PlayerNameRequest.addSessionId(builder, this.sessionId);
-        PlayerNameRequest.addName(builder, builtString);
-        const builtPlayerNameRequest = PlayerNameRequest.endPlayerNameRequest(builder);
-
-        TypeWrapper.startTypeWrapper(builder);
-        TypeWrapper.addMessageType(builder, Message.PlayerNameRequest);
-        TypeWrapper.addMessage(builder, builtPlayerNameRequest);
-        const BuiltTypeWrapper = TypeWrapper.endTypeWrapper(builder);
-
-        builder.finish(BuiltTypeWrapper);
-        const buf = builder.asUint8Array();
-        
-        this.socket?.send(buf);
-    }
-
-    public sendShapeRequest = (shapeInt : number) => 
-    {
-        const builder = new flatbuffers.Builder(256);
-
-        ShapeRequest.startShapeRequest(builder);
-        ShapeRequest.addShapeId(builder, shapeInt);
-        ShapeRequest.addSessionId(builder, this.sessionId);
-        const builtShapeRequest = ShapeRequest.endShapeRequest(builder);
-
-        TypeWrapper.startTypeWrapper(builder);
-        TypeWrapper.addMessageType(builder, Message.ShapeRequest);
-        TypeWrapper.addMessage(builder, builtShapeRequest);
-        const BuiltTypeWrapper = TypeWrapper.endTypeWrapper(builder);
-
-        builder.finish(BuiltTypeWrapper);
-        const buf = builder.asUint8Array();
-        
-        this.socket?.send(buf);
-    }
-
-    public sendPingServerRequest = () =>
-    {
-        const builder = new flatbuffers.Builder(256);
-
-        PingServerRequest.startPingServerRequest(builder);
-        PingServerRequest.addSessionId(builder, this.sessionId);
-        const pingServerRequest = PingServerRequest.endPingServerRequest(builder);
+        LinearColorRequest.startLinearColorRequest(builder);
+        LinearColorRequest.addLinearColor(builder, linearColorOffset);
+        LinearColorRequest.addSessionId(builder, this.sessionId);
+        const linearColorRequest = LinearColorRequest.endLinearColorRequest(builder);
 
         TypeWrapper.startTypeWrapper(builder);
         TypeWrapper.addMessageType(builder, Message.PingServerRequest);
-        TypeWrapper.addMessage(builder, pingServerRequest);
+        TypeWrapper.addMessage(builder, linearColorRequest);
         const typeWrapper = TypeWrapper.endTypeWrapper(builder);
 
         builder.finish(typeWrapper);
@@ -76,52 +35,29 @@ export class NetworkingManager extends BaseNetworkingManager {
 
         this.socket?.send(buf);
     }
-
-    public sendShapeRequestString = (shapeInt: number) =>
-    {
-        const message = { id: this.sessionId, type: "shape", value: shapeInt };
-        this.socket?.send(JSON.stringify(message));
-    }
-
-    public sendOrientationRequestString = (inPitch: number, inYaw: number) => {
-		const message = { id: this.sessionId, type: "orientation", pitch: inPitch, yaw: inYaw};
-		this.socket?.send(JSON.stringify(message));
-	}
-
-    public sendResetOrientationRequestString = () => {
-        const message = { id: this.sessionId, type: 'resetOrientation'};
-        this.socket?.send(JSON.stringify(message));
-    }
-
-    public sendWillMessage = () => {
-        const message = {id: this.sessionId, type: 'Will', value: 'hello'};
-        this.socket?.send(JSON.stringify(message));
-    }
     // END SENDERS
 
     
 
     // START MESSAGE HANDLERS:
-    protected handleClientLoginResponse = (typeWrapper: TypeWrapper) =>
+    protected handleLinearColorResponse(typeWrapper: TypeWrapper): void
     {
-        const clientLoginResponseMessage = new ClientLoginResponse();
-        typeWrapper.message(clientLoginResponseMessage);
+        console.log('received linear color response');
 
-        this.sessionId = clientLoginResponseMessage.assignedSessionId();
+        const linearColorResponse = new LinearColorResponse();
+        typeWrapper.message(linearColorResponse);
 
-        console.log('received sessionId = ', this.sessionId);
+        const linearColorFlatbuffer = linearColorResponse.linearColor();
+        if (!linearColorFlatbuffer) return;
 
-        this.emit(Message.ClientLoginResponse.toString(), this.sessionId);
-    }
+        const outLinearColor: LinearColorObject = {
+            red: linearColorFlatbuffer.red(), 
+            green: linearColorFlatbuffer.green(),
+            blue: linearColorFlatbuffer.blue(),
+            alpha: linearColorFlatbuffer.alpha()
+        };
 
-    protected handlePhaseResponse = (typeWrapper: TypeWrapper) =>
-    {
-        const phaseResponse = new PhaseResponse();
-        typeWrapper.message(phaseResponse);
-
-        console.log('received phase response = ', phaseResponse.phaseId());
-
-        this.emit(Message.PhaseResponse.toString(),  PhaseEnums[phaseResponse.phaseId()]);
+        this.emit(Message.LinearColorResponse, outLinearColor);
     }
     // END MESSAGE HANDLERS
 
@@ -140,9 +76,9 @@ export class NetworkingManager extends BaseNetworkingManager {
 
         switch (messageType)
         {
-            case Message.PhaseResponse:
+            case Message.LinearColorResponse:
             {
-                this.handlePhaseResponse(root);
+                this.handleLinearColorResponse(root);
                 break;
             }
             default:
