@@ -35,6 +35,7 @@ import DrawingWidget from "./components/DrawingWidget";
 import RandomPlayerDataWidget from "./components/RandomPlayerDataWidget";
 import NavMenu from "./components/NavMenu";
 import ConnectBigDomeWidget from "./components/ConnectBigDomeWidget"
+import ColorSelector from "./components/ColorSelector";
 
 const UserInputKey = "UserInput";
 
@@ -216,26 +217,9 @@ const App = () => {
             </VStack>
           </GridItem>
 
-          <GridItem area="InputSelect" rowSpan={3} colSpan={5}>
-            <VStack alignItems={"center"}>
-              <InputSelect
-                Names={["Draw", "Tiles", "Tap n Slash"]}
-                onSelect={selectHandle}
-              />
-              <SuccessOverlay inNetworkingManager={networkingManager} />
-              <span color={textColor} className="resultText">
-                {drawResult}
-              </span>
-              <ScoreWidget inNetworkingManager={networkingManager} />
-              <RandomPlayerDataWidget inNetworkingManager={networkingManager} />
-            </VStack>
-          </GridItem>
-
-          <GridItem area="Main" maxH="600px" rowSpan={4} colSpan={5}>
-            {inputTypes[_index]}
-          </GridItem>
         </Grid>
       </section>
+      <ColorSelector inNetworkingManager={networkingManager} />
     </Container>
   );
 

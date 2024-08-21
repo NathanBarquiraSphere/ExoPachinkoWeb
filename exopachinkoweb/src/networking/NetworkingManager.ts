@@ -13,7 +13,7 @@ export class NetworkingManager extends BaseNetworkingManager {
 
 
     // START SENDERS
-    sendLinearColorResponse(inLinearColor: LinearColorObject): void
+    sendLinearColorRequest(inLinearColor: LinearColorObject): void
     {
         const builder = new flatbuffers.Builder(256);
 
