@@ -25,7 +25,7 @@ export class NetworkingManager extends BaseNetworkingManager {
         const linearColorRequest = LinearColorRequest.endLinearColorRequest(builder);
 
         TypeWrapper.startTypeWrapper(builder);
-        TypeWrapper.addMessageType(builder, Message.PingServerRequest);
+        TypeWrapper.addMessageType(builder, Message.LinearColorRequest);
         TypeWrapper.addMessage(builder, linearColorRequest);
         const typeWrapper = TypeWrapper.endTypeWrapper(builder);
 
