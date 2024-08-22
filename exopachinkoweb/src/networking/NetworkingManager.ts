@@ -6,6 +6,7 @@ import { LinearColorRequest } from '../schema/epschema/linear-color-request';
 import { LinearColorResponse } from '../schema/epschema/linear-color-response';
 import { LinearColor } from '../schema/epschema/linear-color';
 import { LinearColorObject } from '../objects/LinearColorObject';
+import { UseEmissiveRequest } from '../schema/epschema/use-emissive-request';
 
 // similar to ENET client overrides.
 // just create the senders / message handlers here.
@@ -27,6 +28,26 @@ export class NetworkingManager extends BaseNetworkingManager {
         TypeWrapper.startTypeWrapper(builder);
         TypeWrapper.addMessageType(builder, Message.LinearColorRequest);
         TypeWrapper.addMessage(builder, linearColorRequest);
+        const typeWrapper = TypeWrapper.endTypeWrapper(builder);
+
+        builder.finish(typeWrapper);
+
+        const buf = builder.asUint8Array();
+
+        this.socket?.send(buf);
+    }
+    sendUseEmissiveRequest(inUseEmissive: boolean): void
+    {
+        const builder = new flatbuffers.Builder(256);
+
+        UseEmissiveRequest.startUseEmissiveRequest(builder);
+        UseEmissiveRequest.addUseEmissive(builder, inUseEmissive);
+        UseEmissiveRequest.addSessionId(builder, this.sessionId);
+        const builtUseEmissiveRequest = UseEmissiveRequest.endUseEmissiveRequest(builder);
+
+        TypeWrapper.startTypeWrapper(builder);
+        TypeWrapper.addMessageType(builder, Message.UseEmissiveRequest);
+        TypeWrapper.addMessage(builder, builtUseEmissiveRequest);
         const typeWrapper = TypeWrapper.endTypeWrapper(builder);
 
         builder.finish(typeWrapper);

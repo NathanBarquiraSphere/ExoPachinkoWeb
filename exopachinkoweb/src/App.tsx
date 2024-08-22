@@ -14,7 +14,6 @@ import SuccessOverlay from "./components/SuccessOverlay";
 import ScoreWidget from "./components/ScoreWidget";
 import ConnectWidget from "./components/ConnectWidget";
 import { NetworkingManager } from "./networking/NetworkingManager";
-import { Message } from "./schema/wsschema/message";
 import { TemplateManager } from "./Template/TemplateManager";
 import { Result, Point, DollarRecognizer } from "./Template/Recognizer";
 import {
@@ -36,6 +35,8 @@ import RandomPlayerDataWidget from "./components/RandomPlayerDataWidget";
 import NavMenu from "./components/NavMenu";
 import ConnectBigDomeWidget from "./components/ConnectBigDomeWidget"
 import ColorSelector from "./components/ColorSelector";
+import EmissiveCheckBox from "./components/EmissiveCheckBox";
+
 
 const UserInputKey = "UserInput";
 
@@ -211,6 +212,7 @@ const App = () => {
               <Box>
                 <ConnectWidget connectFunction={connectToServer} />
                 <ConnectBigDomeWidget connectFunction={connectToServer} />
+                <EmissiveCheckBox inNetworkingManager={networkingManager} />
               </Box>
             </VStack>
           </GridItem>
