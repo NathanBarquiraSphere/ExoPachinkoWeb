@@ -210,8 +210,6 @@ const App = () => {
             <VStack alignItems={"center"}>
               <Box>
                 <ConnectWidget connectFunction={connectToServer} />
-                <NameEntry inNetworkingManager={networkingManager} />
-                {/* {<AddTemplateWidget AddTemplateFunction={AddTemplate} />} */}
                 <ConnectBigDomeWidget connectFunction={connectToServer} />
               </Box>
             </VStack>
