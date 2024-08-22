@@ -21,6 +21,8 @@ import { PingServerUnreliableResponse } from '../epschema/ping-server-unreliable
 import { RepeaterBinaryResponse } from '../epschema/repeater-binary-response.js';
 import { RepeaterBroadcastBinaryResponse } from '../epschema/repeater-broadcast-binary-response.js';
 import { RepeaterLoginRequest } from '../epschema/repeater-login-request.js';
+import { UseEmissiveRequest } from '../epschema/use-emissive-request.js';
+import { UseEmissiveResponse } from '../epschema/use-emissive-response.js';
 import { WebClientLoginRequest } from '../epschema/web-client-login-request.js';
 import { WebClientLoginResponse } from '../epschema/web-client-login-response.js';
 import { WebClientLogoutRequest } from '../epschema/web-client-logout-request.js';
@@ -51,13 +53,15 @@ export enum Message {
   GenericBatchRequest = 21,
   GenericBatchResponse = 22,
   LinearColorRequest = 23,
-  LinearColorResponse = 24
+  LinearColorResponse = 24,
+  UseEmissiveRequest = 25,
+  UseEmissiveResponse = 26
 }
 
 export function unionToMessage(
   type: Message,
-  accessor: (obj:ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest) => ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest|null
-): ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest|null {
+  accessor: (obj:ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|UseEmissiveRequest|UseEmissiveResponse|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest) => ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|UseEmissiveRequest|UseEmissiveResponse|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest|null
+): ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|UseEmissiveRequest|UseEmissiveResponse|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest|null {
   switch(Message[type]) {
     case 'NONE': return null; 
     case 'PingServerRequest': return accessor(new PingServerRequest())! as PingServerRequest;
@@ -84,15 +88,17 @@ export function unionToMessage(
     case 'GenericBatchResponse': return accessor(new GenericBatchResponse())! as GenericBatchResponse;
     case 'LinearColorRequest': return accessor(new LinearColorRequest())! as LinearColorRequest;
     case 'LinearColorResponse': return accessor(new LinearColorResponse())! as LinearColorResponse;
+    case 'UseEmissiveRequest': return accessor(new UseEmissiveRequest())! as UseEmissiveRequest;
+    case 'UseEmissiveResponse': return accessor(new UseEmissiveResponse())! as UseEmissiveResponse;
     default: return null;
   }
 }
 
 export function unionListToMessage(
   type: Message, 
-  accessor: (index: number, obj:ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest) => ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest|null, 
+  accessor: (index: number, obj:ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|UseEmissiveRequest|UseEmissiveResponse|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest) => ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|UseEmissiveRequest|UseEmissiveResponse|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest|null, 
   index: number
-): ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest|null {
+): ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|UseEmissiveRequest|UseEmissiveResponse|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest|null {
   switch(Message[type]) {
     case 'NONE': return null; 
     case 'PingServerRequest': return accessor(index, new PingServerRequest())! as PingServerRequest;
@@ -119,6 +125,8 @@ export function unionListToMessage(
     case 'GenericBatchResponse': return accessor(index, new GenericBatchResponse())! as GenericBatchResponse;
     case 'LinearColorRequest': return accessor(index, new LinearColorRequest())! as LinearColorRequest;
     case 'LinearColorResponse': return accessor(index, new LinearColorResponse())! as LinearColorResponse;
+    case 'UseEmissiveRequest': return accessor(index, new UseEmissiveRequest())! as UseEmissiveRequest;
+    case 'UseEmissiveResponse': return accessor(index, new UseEmissiveResponse())! as UseEmissiveResponse;
     default: return null;
   }
 }

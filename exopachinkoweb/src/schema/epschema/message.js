@@ -25,6 +25,8 @@ var ping_server_unreliable_response_js_1 = require("../epschema/ping-server-unre
 var repeater_binary_response_js_1 = require("../epschema/repeater-binary-response.js");
 var repeater_broadcast_binary_response_js_1 = require("../epschema/repeater-broadcast-binary-response.js");
 var repeater_login_request_js_1 = require("../epschema/repeater-login-request.js");
+var use_emissive_request_js_1 = require("../epschema/use-emissive-request.js");
+var use_emissive_response_js_1 = require("../epschema/use-emissive-response.js");
 var web_client_login_request_js_1 = require("../epschema/web-client-login-request.js");
 var web_client_login_response_js_1 = require("../epschema/web-client-login-response.js");
 var web_client_logout_request_js_1 = require("../epschema/web-client-logout-request.js");
@@ -55,6 +57,8 @@ var Message;
     Message[Message["GenericBatchResponse"] = 22] = "GenericBatchResponse";
     Message[Message["LinearColorRequest"] = 23] = "LinearColorRequest";
     Message[Message["LinearColorResponse"] = 24] = "LinearColorResponse";
+    Message[Message["UseEmissiveRequest"] = 25] = "UseEmissiveRequest";
+    Message[Message["UseEmissiveResponse"] = 26] = "UseEmissiveResponse";
 })(Message || (exports.Message = Message = {}));
 function unionToMessage(type, accessor) {
     switch (Message[type]) {
@@ -83,6 +87,8 @@ function unionToMessage(type, accessor) {
         case 'GenericBatchResponse': return accessor(new generic_batch_response_js_1.GenericBatchResponse());
         case 'LinearColorRequest': return accessor(new linear_color_request_js_1.LinearColorRequest());
         case 'LinearColorResponse': return accessor(new linear_color_response_js_1.LinearColorResponse());
+        case 'UseEmissiveRequest': return accessor(new use_emissive_request_js_1.UseEmissiveRequest());
+        case 'UseEmissiveResponse': return accessor(new use_emissive_response_js_1.UseEmissiveResponse());
         default: return null;
     }
 }
@@ -113,6 +119,8 @@ function unionListToMessage(type, accessor, index) {
         case 'GenericBatchResponse': return accessor(index, new generic_batch_response_js_1.GenericBatchResponse());
         case 'LinearColorRequest': return accessor(index, new linear_color_request_js_1.LinearColorRequest());
         case 'LinearColorResponse': return accessor(index, new linear_color_response_js_1.LinearColorResponse());
+        case 'UseEmissiveRequest': return accessor(index, new use_emissive_request_js_1.UseEmissiveRequest());
+        case 'UseEmissiveResponse': return accessor(index, new use_emissive_response_js_1.UseEmissiveResponse());
         default: return null;
     }
 }

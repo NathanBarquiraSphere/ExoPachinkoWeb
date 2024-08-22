@@ -25,6 +25,8 @@ export { RepeaterBinaryResponse } from './epschema/repeater-binary-response.js';
 export { RepeaterBroadcastBinaryResponse } from './epschema/repeater-broadcast-binary-response.js';
 export { RepeaterLoginRequest } from './epschema/repeater-login-request.js';
 export { TypeWrapper } from './epschema/type-wrapper.js';
+export { UseEmissiveRequest } from './epschema/use-emissive-request.js';
+export { UseEmissiveResponse } from './epschema/use-emissive-response.js';
 export { WebClientLoginRequest } from './epschema/web-client-login-request.js';
 export { WebClientLoginResponse } from './epschema/web-client-login-response.js';
 export { WebClientLogoutRequest } from './epschema/web-client-logout-request.js';
