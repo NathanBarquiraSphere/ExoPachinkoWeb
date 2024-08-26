@@ -38,6 +38,7 @@ import ConnectExoWidget from "./components/ConnectToExo";
 import ColorSelector from "./components/ColorSelector";
 import EmissiveCheckBox from "./components/EmissiveCheckBox";
 import PlayerTrailCheckBox from "./components/PlayerTrailCheckBox";
+import TrailLengthSlider from "./components/TrailLengthSlider";
 
 
 const UserInputKey = "UserInput";
@@ -215,6 +216,7 @@ const App = () => {
                 <ConnectExoWidget connectFunction={connectToServer} />
                 <EmissiveCheckBox inNetworkingManager={networkingManager} />
                 <PlayerTrailCheckBox inNetworkingManager={networkingManager} />
+                <TrailLengthSlider inNetworkingManager={networkingManager} />
               </Box>
             
           </GridItem>
