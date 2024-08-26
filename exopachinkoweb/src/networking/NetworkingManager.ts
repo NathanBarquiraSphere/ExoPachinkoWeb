@@ -135,7 +135,7 @@ export class NetworkingManager extends BaseNetworkingManager {
 
         const shouldUseEmissive = useEmissiveResponse.useEmissive();
 
-        this.emit(Message.LinearColorResponse.toString(), shouldUseEmissive);
+        this.emit(Message.UseEmissiveResponse.toString(), shouldUseEmissive);
     }
     protected handlePlayerTrailResponse(typeWrapper: TypeWrapper): void
     {
@@ -146,7 +146,7 @@ export class NetworkingManager extends BaseNetworkingManager {
 
         const shouldShowTrail = playerTrailResponse.showTrail();
 
-        this.emit(Message.LinearColorResponse.toString(), shouldShowTrail);
+        this.emit(Message.PlayerTrailResponse.toString(), shouldShowTrail);
     }
     protected handleTrailLengthResponse(typeWrapper: TypeWrapper): void
     {
@@ -157,7 +157,7 @@ export class NetworkingManager extends BaseNetworkingManager {
 
         const trailLength = trailLengthResponse.length();
 
-        this.emit(Message.LinearColorResponse.toString(), trailLength);
+        this.emit(Message.TrailLengthResponse.toString(), trailLength);
     }
     // END MESSAGE HANDLERS
 
