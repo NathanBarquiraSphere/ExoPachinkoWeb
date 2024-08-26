@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { NetworkingManager } from "./../networking/NetworkingManager";
+import { Message } from "../schema/epschema/message";
 
 
 interface TrailLengthSliderProps {
@@ -19,6 +20,22 @@ const TrailLengthSlider = ({inNetworkingManager} : TrailLengthSliderProps) => {
 
         inNetworkingManager?.sendTrailLengthRequest(newValue);
     }
+
+    useEffect(() =>
+        {
+            const handleTrailLengthResponse = (inTrailValue: number) =>
+            {
+                setValue(inTrailValue);
+            };
+    
+            inNetworkingManager?.on(Message.TrailLengthResponse.toString(), handleTrailLengthResponse);
+    
+            // cleaning up
+            return () =>
+            {
+                inNetworkingManager?.off(Message.TrailLengthResponse.toString(), handleTrailLengthResponse);
+            };
+        }, [inNetworkingManager]);
 
 
     return (

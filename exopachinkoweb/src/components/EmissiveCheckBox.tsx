@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { NetworkingManager } from "./../networking/NetworkingManager";
+import { Message } from "../schema/epschema/message";
 
 
 interface EmissiveCheckBoxProps {
@@ -17,6 +18,27 @@ const EmissiveCheckBox = ({inNetworkingManager} : EmissiveCheckBoxProps) => {
         console.log("new state =", newState);
         inNetworkingManager?.sendUseEmissiveRequest(newState);
     }
+
+    useEffect(() =>
+        {
+            const handleUseEmissiveResponse = (inUseEmissive: boolean) =>
+            {
+                setUseEmissive(inUseEmissive);
+            };
+    
+            const resetStringData = () =>
+            {
+                setUseEmissive(false);
+            }
+    
+            inNetworkingManager?.on(Message.UseEmissiveResponse.toString(), handleUseEmissiveResponse);
+    
+            // cleaning up
+            return () =>
+            {
+                inNetworkingManager?.off(Message.UseEmissiveResponse.toString(), handleUseEmissiveResponse);
+            };
+        }, [inNetworkingManager]);
 
 
     return (

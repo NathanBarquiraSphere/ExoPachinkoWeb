@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { NetworkingManager } from "./../networking/NetworkingManager";
+import { Message } from "../schema/epschema/message";
 
 
 interface PlayerTrailCheckBoxProps {
@@ -8,15 +9,31 @@ interface PlayerTrailCheckBoxProps {
 
 const PlayerTrailCheckBox = ({inNetworkingManager} : PlayerTrailCheckBoxProps) => {
 
-    const [useEmissive, setUseEmissive] = useState<boolean>(false);
+    const [useTrail, setUseTrail] = useState<boolean>(false);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     {
         const newState = event.target.checked;
-        setUseEmissive(newState);
+        setUseTrail(newState);
         console.log("new player trail state =", newState);
         inNetworkingManager?.sendPlayerTrailRequest(newState);
     }
+
+    useEffect(() =>
+        {
+            const handlePlayerTrailResponse = (inUseTrail: boolean) =>
+            {
+                setUseTrail(inUseTrail);
+            };
+    
+            inNetworkingManager?.on(Message.PlayerTrailResponse.toString(), handlePlayerTrailResponse);
+    
+            // cleaning up
+            return () =>
+            {
+                inNetworkingManager?.off(Message.PlayerTrailResponse.toString(), handlePlayerTrailResponse);
+            };
+        }, [inNetworkingManager]);
 
 
     return (

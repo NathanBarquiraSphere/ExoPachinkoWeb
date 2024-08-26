@@ -9,6 +9,10 @@ import { LinearColorObject } from '../objects/LinearColorObject';
 import { UseEmissiveRequest } from '../schema/epschema/use-emissive-request';
 import { PlayerTrailRequest } from '../schema/epschema/player-trail-request';
 import { TrailLengthRequest } from '../schema/epschema/trail-length-request';
+import { UseEmissiveResponse } from '../schema/epschema/use-emissive-response';
+import { PlayerTrailResponse } from '../schema/epschema/player-trail-response';
+import { TrailLengthResponse } from '../schema/epschema/trail-length-response';
+
 
 // similar to ENET client overrides.
 // just create the senders / message handlers here.
@@ -120,7 +124,40 @@ export class NetworkingManager extends BaseNetworkingManager {
             alpha: linearColorFlatbuffer.alpha()
         };
 
-        this.emit(Message.LinearColorResponse, outLinearColor);
+        this.emit(Message.LinearColorResponse.toString(), outLinearColor);
+    }
+    protected handleUseEmissiveRequest(typeWrapper: TypeWrapper): void
+    {
+        console.log('received use emissive response')
+
+        const useEmissiveResponse = new UseEmissiveResponse();
+        typeWrapper.message(useEmissiveResponse);
+
+        const shouldUseEmissive = useEmissiveResponse.useEmissive();
+
+        this.emit(Message.LinearColorResponse.toString(), shouldUseEmissive);
+    }
+    protected handlePlayerTrailResponse(typeWrapper: TypeWrapper): void
+    {
+        console.log('received player trail response')
+
+        const playerTrailResponse = new PlayerTrailResponse();
+        typeWrapper.message(playerTrailResponse);
+
+        const shouldShowTrail = playerTrailResponse.showTrail();
+
+        this.emit(Message.LinearColorResponse.toString(), shouldShowTrail);
+    }
+    protected handleTrailLengthResponse(typeWrapper: TypeWrapper): void
+    {
+        console.log('received trail length response')
+
+        const trailLengthResponse = new TrailLengthResponse();
+        typeWrapper.message(trailLengthResponse);
+
+        const trailLength = trailLengthResponse.length();
+
+        this.emit(Message.LinearColorResponse.toString(), trailLength);
     }
     // END MESSAGE HANDLERS
 
@@ -142,6 +179,21 @@ export class NetworkingManager extends BaseNetworkingManager {
             case Message.LinearColorResponse:
             {
                 this.handleLinearColorResponse(root);
+                break;
+            }
+            case Message.TrailLengthResponse:
+            {
+                this.handleTrailLengthResponse(root);
+                break;
+            }
+            case Message.UseEmissiveResponse:
+            {
+                this.handleUseEmissiveRequest(root);
+                break;
+            }
+            case Message.PlayerTrailResponse:
+            {
+                this.handlePlayerTrailResponse(root);
                 break;
             }
             default:
