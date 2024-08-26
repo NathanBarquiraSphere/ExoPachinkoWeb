@@ -21,6 +21,8 @@ export { PingServerRequest } from './epschema/ping-server-request.js';
 export { PingServerResponse } from './epschema/ping-server-response.js';
 export { PingServerUnreliableRequest } from './epschema/ping-server-unreliable-request.js';
 export { PingServerUnreliableResponse } from './epschema/ping-server-unreliable-response.js';
+export { PlayerTrailRequest } from './epschema/player-trail-request.js';
+export { PlayerTrailResponse } from './epschema/player-trail-response.js';
 export { RepeaterBinaryResponse } from './epschema/repeater-binary-response.js';
 export { RepeaterBroadcastBinaryResponse } from './epschema/repeater-broadcast-binary-response.js';
 export { RepeaterLoginRequest } from './epschema/repeater-login-request.js';

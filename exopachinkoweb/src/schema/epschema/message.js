@@ -22,6 +22,8 @@ var ping_server_request_js_1 = require("../epschema/ping-server-request.js");
 var ping_server_response_js_1 = require("../epschema/ping-server-response.js");
 var ping_server_unreliable_request_js_1 = require("../epschema/ping-server-unreliable-request.js");
 var ping_server_unreliable_response_js_1 = require("../epschema/ping-server-unreliable-response.js");
+var player_trail_request_js_1 = require("../epschema/player-trail-request.js");
+var player_trail_response_js_1 = require("../epschema/player-trail-response.js");
 var repeater_binary_response_js_1 = require("../epschema/repeater-binary-response.js");
 var repeater_broadcast_binary_response_js_1 = require("../epschema/repeater-broadcast-binary-response.js");
 var repeater_login_request_js_1 = require("../epschema/repeater-login-request.js");
@@ -59,6 +61,8 @@ var Message;
     Message[Message["LinearColorResponse"] = 24] = "LinearColorResponse";
     Message[Message["UseEmissiveRequest"] = 25] = "UseEmissiveRequest";
     Message[Message["UseEmissiveResponse"] = 26] = "UseEmissiveResponse";
+    Message[Message["PlayerTrailRequest"] = 27] = "PlayerTrailRequest";
+    Message[Message["PlayerTrailResponse"] = 28] = "PlayerTrailResponse";
 })(Message || (exports.Message = Message = {}));
 function unionToMessage(type, accessor) {
     switch (Message[type]) {
@@ -89,6 +93,8 @@ function unionToMessage(type, accessor) {
         case 'LinearColorResponse': return accessor(new linear_color_response_js_1.LinearColorResponse());
         case 'UseEmissiveRequest': return accessor(new use_emissive_request_js_1.UseEmissiveRequest());
         case 'UseEmissiveResponse': return accessor(new use_emissive_response_js_1.UseEmissiveResponse());
+        case 'PlayerTrailRequest': return accessor(new player_trail_request_js_1.PlayerTrailRequest());
+        case 'PlayerTrailResponse': return accessor(new player_trail_response_js_1.PlayerTrailResponse());
         default: return null;
     }
 }
@@ -121,6 +127,8 @@ function unionListToMessage(type, accessor, index) {
         case 'LinearColorResponse': return accessor(index, new linear_color_response_js_1.LinearColorResponse());
         case 'UseEmissiveRequest': return accessor(index, new use_emissive_request_js_1.UseEmissiveRequest());
         case 'UseEmissiveResponse': return accessor(index, new use_emissive_response_js_1.UseEmissiveResponse());
+        case 'PlayerTrailRequest': return accessor(index, new player_trail_request_js_1.PlayerTrailRequest());
+        case 'PlayerTrailResponse': return accessor(index, new player_trail_response_js_1.PlayerTrailResponse());
         default: return null;
     }
 }
