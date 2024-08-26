@@ -43,7 +43,7 @@ const EmissiveCheckBox = ({inNetworkingManager} : EmissiveCheckBoxProps) => {
 
     return (
         <div>
-            <input type="checkbox" style = {{width:"30px", height:"30px"}} id="emissiveCheckBox" onChange={handleChange}/>
+            <input type="checkbox" checked={useEmissive} style = {{width:"30px", height:"30px"}} id="emissiveCheckBox" onChange={handleChange}/>
             <label htmlFor="emissiveCheckBox" style={{ color: 'white', fontSize:"30px"}}> UseEmissiveColor </label>
         </div>
     )
