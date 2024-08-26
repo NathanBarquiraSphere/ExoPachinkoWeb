@@ -45,7 +45,7 @@ const ConnectWidget = ({ connectFunction }: ConnectWidgetProps) => {
               placeholder="Enter ip address here"
             />
             <Button colorScheme="teal" onClick={tryConnect}>
-              Connect To Server
+              Connect
             </Button>
           </HStack>
         </div>

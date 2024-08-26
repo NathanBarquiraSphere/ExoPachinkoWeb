@@ -208,15 +208,15 @@ const App = () => {
             </Center>
           </GridItem>
 
-          <GridItem area="Connections" rowSpan={2} colSpan={5}>
-            <VStack alignItems={"center"}>
+          <GridItem width="100%" maxW="100%" area="Connections" rowSpan={2} colSpan={5}>
+            
               <Box>
                 <ConnectWidget connectFunction={connectToServer} />
                 <ConnectBigDomeWidget connectFunction={connectToServer} />
                 <EmissiveCheckBox inNetworkingManager={networkingManager} />
                 <PlayerTrailCheckBox inNetworkingManager={networkingManager} />
               </Box>
-            </VStack>
+            
           </GridItem>
 
         </Grid>
