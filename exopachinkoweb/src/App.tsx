@@ -34,6 +34,7 @@ import DrawingWidget from "./components/DrawingWidget";
 import RandomPlayerDataWidget from "./components/RandomPlayerDataWidget";
 import NavMenu from "./components/NavMenu";
 import ConnectBigDomeWidget from "./components/ConnectBigDomeWidget"
+import ConnectExoWidget from "./components/ConnectToExo";
 import ColorSelector from "./components/ColorSelector";
 import EmissiveCheckBox from "./components/EmissiveCheckBox";
 import PlayerTrailCheckBox from "./components/PlayerTrailCheckBox";
@@ -200,11 +201,10 @@ const App = () => {
           p={"10px"}
         >
           <GridItem rowSpan={1} colSpan={1} area="Heading" mt="1%">
-            <NavMenu />
           </GridItem>
           <GridItem rowSpan={1} colStart={2} colEnd={5} area="Heading" mt="1%">
             <Center>
-              <Heading color={textColor}>PreFE</Heading>
+              <Heading color="white">Exo Pachinko</Heading>
             </Center>
           </GridItem>
 
@@ -212,7 +212,7 @@ const App = () => {
             
               <Box>
                 <ConnectWidget connectFunction={connectToServer} />
-                <ConnectBigDomeWidget connectFunction={connectToServer} />
+                <ConnectExoWidget connectFunction={connectToServer} />
                 <EmissiveCheckBox inNetworkingManager={networkingManager} />
                 <PlayerTrailCheckBox inNetworkingManager={networkingManager} />
               </Box>
