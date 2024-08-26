@@ -21,7 +21,7 @@ const PlayerTrailCheckBox = ({inNetworkingManager} : PlayerTrailCheckBoxProps) =
 
     return (
         <div>
-            <input type="checkbox" id="trailCheckBox" onChange={handleChange}/>
+            <input style = {{width: "20px", height:"20px"}} type="checkbox" id="trailCheckBox" onChange={handleChange}/>
             <label htmlFor="trailCheckBox" style={{ color: 'white'}}> UsePlayerTrail </label>
         </div>
     )
