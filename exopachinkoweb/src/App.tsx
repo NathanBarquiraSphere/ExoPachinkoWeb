@@ -36,6 +36,7 @@ import NavMenu from "./components/NavMenu";
 import ConnectBigDomeWidget from "./components/ConnectBigDomeWidget"
 import ColorSelector from "./components/ColorSelector";
 import EmissiveCheckBox from "./components/EmissiveCheckBox";
+import PlayerTrailCheckBox from "./components/PlayerTrailCheckBox";
 
 
 const UserInputKey = "UserInput";
@@ -213,6 +214,7 @@ const App = () => {
                 <ConnectWidget connectFunction={connectToServer} />
                 <ConnectBigDomeWidget connectFunction={connectToServer} />
                 <EmissiveCheckBox inNetworkingManager={networkingManager} />
+                <PlayerTrailCheckBox inNetworkingManager={networkingManager} />
               </Box>
             </VStack>
           </GridItem>
