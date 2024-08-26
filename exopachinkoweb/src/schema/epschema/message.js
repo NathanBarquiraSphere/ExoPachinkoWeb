@@ -27,6 +27,8 @@ var player_trail_response_js_1 = require("../epschema/player-trail-response.js")
 var repeater_binary_response_js_1 = require("../epschema/repeater-binary-response.js");
 var repeater_broadcast_binary_response_js_1 = require("../epschema/repeater-broadcast-binary-response.js");
 var repeater_login_request_js_1 = require("../epschema/repeater-login-request.js");
+var trail_length_request_js_1 = require("../epschema/trail-length-request.js");
+var trail_length_response_js_1 = require("../epschema/trail-length-response.js");
 var use_emissive_request_js_1 = require("../epschema/use-emissive-request.js");
 var use_emissive_response_js_1 = require("../epschema/use-emissive-response.js");
 var web_client_login_request_js_1 = require("../epschema/web-client-login-request.js");
@@ -63,6 +65,8 @@ var Message;
     Message[Message["UseEmissiveResponse"] = 26] = "UseEmissiveResponse";
     Message[Message["PlayerTrailRequest"] = 27] = "PlayerTrailRequest";
     Message[Message["PlayerTrailResponse"] = 28] = "PlayerTrailResponse";
+    Message[Message["TrailLengthRequest"] = 29] = "TrailLengthRequest";
+    Message[Message["TrailLengthResponse"] = 30] = "TrailLengthResponse";
 })(Message || (exports.Message = Message = {}));
 function unionToMessage(type, accessor) {
     switch (Message[type]) {
@@ -95,6 +99,8 @@ function unionToMessage(type, accessor) {
         case 'UseEmissiveResponse': return accessor(new use_emissive_response_js_1.UseEmissiveResponse());
         case 'PlayerTrailRequest': return accessor(new player_trail_request_js_1.PlayerTrailRequest());
         case 'PlayerTrailResponse': return accessor(new player_trail_response_js_1.PlayerTrailResponse());
+        case 'TrailLengthRequest': return accessor(new trail_length_request_js_1.TrailLengthRequest());
+        case 'TrailLengthResponse': return accessor(new trail_length_response_js_1.TrailLengthResponse());
         default: return null;
     }
 }
@@ -129,6 +135,8 @@ function unionListToMessage(type, accessor, index) {
         case 'UseEmissiveResponse': return accessor(index, new use_emissive_response_js_1.UseEmissiveResponse());
         case 'PlayerTrailRequest': return accessor(index, new player_trail_request_js_1.PlayerTrailRequest());
         case 'PlayerTrailResponse': return accessor(index, new player_trail_response_js_1.PlayerTrailResponse());
+        case 'TrailLengthRequest': return accessor(index, new trail_length_request_js_1.TrailLengthRequest());
+        case 'TrailLengthResponse': return accessor(index, new trail_length_response_js_1.TrailLengthResponse());
         default: return null;
     }
 }

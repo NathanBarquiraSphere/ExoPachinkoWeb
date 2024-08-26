@@ -16,6 +16,8 @@ const TrailLengthSlider = ({inNetworkingManager} : TrailLengthSliderProps) => {
         setValue(newValue);
 
         console.log('slider value = ', newValue);
+
+        inNetworkingManager?.sendTrailLengthRequest(newValue);
     }
 
 

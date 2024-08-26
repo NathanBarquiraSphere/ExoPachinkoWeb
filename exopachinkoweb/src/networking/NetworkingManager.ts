@@ -8,6 +8,7 @@ import { LinearColor } from '../schema/epschema/linear-color';
 import { LinearColorObject } from '../objects/LinearColorObject';
 import { UseEmissiveRequest } from '../schema/epschema/use-emissive-request';
 import { PlayerTrailRequest } from '../schema/epschema/player-trail-request';
+import { TrailLengthRequest } from '../schema/epschema/trail-length-request';
 
 // similar to ENET client overrides.
 // just create the senders / message handlers here.
@@ -69,6 +70,26 @@ export class NetworkingManager extends BaseNetworkingManager {
         TypeWrapper.startTypeWrapper(builder);
         TypeWrapper.addMessageType(builder, Message.PlayerTrailRequest);
         TypeWrapper.addMessage(builder, builtPlayerTrailRequest);
+        const typeWrapper = TypeWrapper.endTypeWrapper(builder);
+
+        builder.finish(typeWrapper);
+
+        const buf = builder.asUint8Array();
+
+        this.socket?.send(buf);
+    }
+    sendTrailLengthRequest(inLength: number): void
+    {
+        const builder = new flatbuffers.Builder(256);
+
+        TrailLengthRequest.startTrailLengthRequest(builder);
+        TrailLengthRequest.addLength(builder, inLength);
+        TrailLengthRequest.addSessionId(builder, this.sessionId);
+        const builtTrailLengthRequest = TrailLengthRequest.endTrailLengthRequest(builder);
+
+        TypeWrapper.startTypeWrapper(builder);
+        TypeWrapper.addMessageType(builder, Message.TrailLengthRequest);
+        TypeWrapper.addMessage(builder, builtTrailLengthRequest);
         const typeWrapper = TypeWrapper.endTypeWrapper(builder);
 
         builder.finish(typeWrapper);

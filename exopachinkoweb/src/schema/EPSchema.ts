@@ -26,6 +26,8 @@ export { PlayerTrailResponse } from './epschema/player-trail-response.js';
 export { RepeaterBinaryResponse } from './epschema/repeater-binary-response.js';
 export { RepeaterBroadcastBinaryResponse } from './epschema/repeater-broadcast-binary-response.js';
 export { RepeaterLoginRequest } from './epschema/repeater-login-request.js';
+export { TrailLengthRequest } from './epschema/trail-length-request.js';
+export { TrailLengthResponse } from './epschema/trail-length-response.js';
 export { TypeWrapper } from './epschema/type-wrapper.js';
 export { UseEmissiveRequest } from './epschema/use-emissive-request.js';
 export { UseEmissiveResponse } from './epschema/use-emissive-response.js';

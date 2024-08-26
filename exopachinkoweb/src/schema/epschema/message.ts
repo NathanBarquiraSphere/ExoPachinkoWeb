@@ -23,6 +23,8 @@ import { PlayerTrailResponse } from '../epschema/player-trail-response.js';
 import { RepeaterBinaryResponse } from '../epschema/repeater-binary-response.js';
 import { RepeaterBroadcastBinaryResponse } from '../epschema/repeater-broadcast-binary-response.js';
 import { RepeaterLoginRequest } from '../epschema/repeater-login-request.js';
+import { TrailLengthRequest } from '../epschema/trail-length-request.js';
+import { TrailLengthResponse } from '../epschema/trail-length-response.js';
 import { UseEmissiveRequest } from '../epschema/use-emissive-request.js';
 import { UseEmissiveResponse } from '../epschema/use-emissive-response.js';
 import { WebClientLoginRequest } from '../epschema/web-client-login-request.js';
@@ -59,13 +61,15 @@ export enum Message {
   UseEmissiveRequest = 25,
   UseEmissiveResponse = 26,
   PlayerTrailRequest = 27,
-  PlayerTrailResponse = 28
+  PlayerTrailResponse = 28,
+  TrailLengthRequest = 29,
+  TrailLengthResponse = 30
 }
 
 export function unionToMessage(
   type: Message,
-  accessor: (obj:ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|PlayerTrailRequest|PlayerTrailResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|UseEmissiveRequest|UseEmissiveResponse|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest) => ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|PlayerTrailRequest|PlayerTrailResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|UseEmissiveRequest|UseEmissiveResponse|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest|null
-): ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|PlayerTrailRequest|PlayerTrailResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|UseEmissiveRequest|UseEmissiveResponse|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest|null {
+  accessor: (obj:ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|PlayerTrailRequest|PlayerTrailResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|TrailLengthRequest|TrailLengthResponse|UseEmissiveRequest|UseEmissiveResponse|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest) => ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|PlayerTrailRequest|PlayerTrailResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|TrailLengthRequest|TrailLengthResponse|UseEmissiveRequest|UseEmissiveResponse|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest|null
+): ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|PlayerTrailRequest|PlayerTrailResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|TrailLengthRequest|TrailLengthResponse|UseEmissiveRequest|UseEmissiveResponse|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest|null {
   switch(Message[type]) {
     case 'NONE': return null; 
     case 'PingServerRequest': return accessor(new PingServerRequest())! as PingServerRequest;
@@ -96,15 +100,17 @@ export function unionToMessage(
     case 'UseEmissiveResponse': return accessor(new UseEmissiveResponse())! as UseEmissiveResponse;
     case 'PlayerTrailRequest': return accessor(new PlayerTrailRequest())! as PlayerTrailRequest;
     case 'PlayerTrailResponse': return accessor(new PlayerTrailResponse())! as PlayerTrailResponse;
+    case 'TrailLengthRequest': return accessor(new TrailLengthRequest())! as TrailLengthRequest;
+    case 'TrailLengthResponse': return accessor(new TrailLengthResponse())! as TrailLengthResponse;
     default: return null;
   }
 }
 
 export function unionListToMessage(
   type: Message, 
-  accessor: (index: number, obj:ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|PlayerTrailRequest|PlayerTrailResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|UseEmissiveRequest|UseEmissiveResponse|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest) => ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|PlayerTrailRequest|PlayerTrailResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|UseEmissiveRequest|UseEmissiveResponse|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest|null, 
+  accessor: (index: number, obj:ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|PlayerTrailRequest|PlayerTrailResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|TrailLengthRequest|TrailLengthResponse|UseEmissiveRequest|UseEmissiveResponse|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest) => ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|PlayerTrailRequest|PlayerTrailResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|TrailLengthRequest|TrailLengthResponse|UseEmissiveRequest|UseEmissiveResponse|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest|null, 
   index: number
-): ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|PlayerTrailRequest|PlayerTrailResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|UseEmissiveRequest|UseEmissiveResponse|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest|null {
+): ClientLoginResponse|GenericBatchRequest|GenericBatchResponse|JsonToBinaryRequest|JsonToBinaryResponse|LinearColorRequest|LinearColorResponse|MediaPlaneLoginRequest|MobileToMediaPlaneLoginRequest|MobileToMediaPlaneLogoutRequest|PingMediaPlaneRequest|PingMediaPlaneResponse|PingMediaPlaneUnreliableRequest|PingMediaPlaneUnreliableResponse|PingServerRequest|PingServerResponse|PingServerUnreliableRequest|PingServerUnreliableResponse|PlayerTrailRequest|PlayerTrailResponse|RepeaterBinaryResponse|RepeaterBroadcastBinaryResponse|RepeaterLoginRequest|TrailLengthRequest|TrailLengthResponse|UseEmissiveRequest|UseEmissiveResponse|WebClientLoginRequest|WebClientLoginResponse|WebClientLogoutRequest|null {
   switch(Message[type]) {
     case 'NONE': return null; 
     case 'PingServerRequest': return accessor(index, new PingServerRequest())! as PingServerRequest;
@@ -135,6 +141,8 @@ export function unionListToMessage(
     case 'UseEmissiveResponse': return accessor(index, new UseEmissiveResponse())! as UseEmissiveResponse;
     case 'PlayerTrailRequest': return accessor(index, new PlayerTrailRequest())! as PlayerTrailRequest;
     case 'PlayerTrailResponse': return accessor(index, new PlayerTrailResponse())! as PlayerTrailResponse;
+    case 'TrailLengthRequest': return accessor(index, new TrailLengthRequest())! as TrailLengthRequest;
+    case 'TrailLengthResponse': return accessor(index, new TrailLengthResponse())! as TrailLengthResponse;
     default: return null;
   }
 }
