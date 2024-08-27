@@ -193,17 +193,15 @@ const App = () => {
   ];
 
   return (
-    <Container className="App" maxW={"sm"}>
+    <Container className="App">
       <section className="ipcon">
         <Grid
-          templateRows="repeat(4, 0.6fr)"
+          templateRows="repeat(3, 0.6fr)"
           templateColumns="repeat(5, 1fr)"
           templateAreas={`"Heading" "Connections" "InputSelect" "Main"`}
           gap={4}
-          p={"10px"}
+          p={"5px"}
         >
-          <GridItem rowSpan={1} colSpan={1} area="Heading" mt="1%">
-          </GridItem>
           <GridItem rowSpan={1} colStart={2} colEnd={5} area="Heading" mt="1%">
             <Center>
               <Heading color="white">Exo Pachinko</Heading>
