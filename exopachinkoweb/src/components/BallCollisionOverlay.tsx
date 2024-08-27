@@ -3,7 +3,8 @@ import { NetworkingManager } from "./../networking/NetworkingManager";
 import { Message } from "../schema/epschema/message";
 
 import SucessSound from "../assets/sounds/SuccessSound.wav";
-import FailSound from "../assets/sounds/IncorrectSound.wav";
+
+import BallHitSound from "../assets/sounds/HitSound.wav";
 
 interface BallCollisionOverlayProps {
   inNetworkingManager: NetworkingManager | null;
@@ -22,14 +23,8 @@ const BallCollisionOverlay = ({ inNetworkingManager }: BallCollisionOverlayProps
     {
         if (shouldPlaySounds) 
         {
-            const failAudio = new Audio(FailSound);
+            const failAudio = new Audio(BallHitSound);
             failAudio.play();
-        }
-
-        // playing haptics if possible
-        if ("vibrate" in navigator) 
-        {
-            navigator.vibrate(hapticTime);
         }
         
     };
