@@ -11,9 +11,17 @@ export class BaseNetworkingManager extends EventEmitter {
     protected socket: WebSocket | null = null;
     protected sessionId: number = -1;
 
+    public static readonly websocketStatusEventName: string = "websocketStatus";
+
     public constructor(private url: string)
     {
         super();
+    }
+
+    public isConnected(): boolean
+    {
+        if (!this.socket) return false;
+        return this.socket.readyState === WebSocket.OPEN;
     }
 
     public sendPingServerRequest = (): void =>
@@ -48,12 +56,15 @@ export class BaseNetworkingManager extends EventEmitter {
             // socket bindings
             this.socket.onopen = () => 
             {
+                this.emit(Message.WebClientLoginResponse, true);
                 alert("Connected to websocket with ip = " + this.url);
+                console.log('base manager message = ', BaseNetworkingManager.websocketStatusEventName);
                 resolve();
             };
             this.socket.onerror = (error) => 
             {
                 alert("Could not connect to ip = " + this.url);
+                this.emit(BaseNetworkingManager.websocketStatusEventName, false);
                 reject(error);
             };
             this.socket.onmessage = (event) => 
@@ -63,6 +74,7 @@ export class BaseNetworkingManager extends EventEmitter {
             this.socket.onclose = () =>
             {
                 console.log('websocket connection closed');
+                this.emit(BaseNetworkingManager.websocketStatusEventName, false);
             };
         })
     };

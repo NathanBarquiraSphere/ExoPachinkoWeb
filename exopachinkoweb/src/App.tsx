@@ -40,6 +40,7 @@ import EmissiveCheckBox from "./components/EmissiveCheckBox";
 import PlayerTrailCheckBox from "./components/PlayerTrailCheckBox";
 import TrailLengthSlider from "./components/TrailLengthSlider";
 import AcceptCertButtonExo from "./components/AcceptCertButtonExo";
+import IsConnectedWidget from "./components/IsConnectedWidget";
 
 
 const UserInputKey = "UserInput";
@@ -117,6 +118,7 @@ const App = () => {
           <GridItem width="100%" maxW="100%" area="Connections" rowSpan={2} colSpan={5} mt="-2%">
             
               <Box>
+                <IsConnectedWidget inNetworkingManager={networkingManager} />
                 <AcceptCertButtonExo />
                 <ConnectExoWidget connectFunction={connectToServer} />
                 <EmissiveCheckBox inNetworkingManager={networkingManager} />
