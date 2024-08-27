@@ -39,6 +39,7 @@ import ColorSelector from "./components/ColorSelector";
 import EmissiveCheckBox from "./components/EmissiveCheckBox";
 import PlayerTrailCheckBox from "./components/PlayerTrailCheckBox";
 import TrailLengthSlider from "./components/TrailLengthSlider";
+import AcceptCertButtonExo from "./components/AcceptCertButtonExo";
 
 
 const UserInputKey = "UserInput";
@@ -213,6 +214,7 @@ const App = () => {
             
               <Box>
                 <ConnectWidget connectFunction={connectToServer} />
+                <AcceptCertButtonExo />
                 <ConnectExoWidget connectFunction={connectToServer} />
                 <EmissiveCheckBox inNetworkingManager={networkingManager} />
                 <PlayerTrailCheckBox inNetworkingManager={networkingManager} />
