@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Message = void 0;
 exports.unionToMessage = unionToMessage;
 exports.unionListToMessage = unionListToMessage;
+var ball_collision_response_js_1 = require("../epschema/ball-collision-response.js");
 var client_login_response_js_1 = require("../epschema/client-login-response.js");
 var generic_batch_request_js_1 = require("../epschema/generic-batch-request.js");
 var generic_batch_response_js_1 = require("../epschema/generic-batch-response.js");
@@ -67,6 +68,7 @@ var Message;
     Message[Message["PlayerTrailResponse"] = 28] = "PlayerTrailResponse";
     Message[Message["TrailLengthRequest"] = 29] = "TrailLengthRequest";
     Message[Message["TrailLengthResponse"] = 30] = "TrailLengthResponse";
+    Message[Message["BallCollisionResponse"] = 31] = "BallCollisionResponse";
 })(Message || (exports.Message = Message = {}));
 function unionToMessage(type, accessor) {
     switch (Message[type]) {
@@ -101,6 +103,7 @@ function unionToMessage(type, accessor) {
         case 'PlayerTrailResponse': return accessor(new player_trail_response_js_1.PlayerTrailResponse());
         case 'TrailLengthRequest': return accessor(new trail_length_request_js_1.TrailLengthRequest());
         case 'TrailLengthResponse': return accessor(new trail_length_response_js_1.TrailLengthResponse());
+        case 'BallCollisionResponse': return accessor(new ball_collision_response_js_1.BallCollisionResponse());
         default: return null;
     }
 }
@@ -137,6 +140,7 @@ function unionListToMessage(type, accessor, index) {
         case 'PlayerTrailResponse': return accessor(index, new player_trail_response_js_1.PlayerTrailResponse());
         case 'TrailLengthRequest': return accessor(index, new trail_length_request_js_1.TrailLengthRequest());
         case 'TrailLengthResponse': return accessor(index, new trail_length_response_js_1.TrailLengthResponse());
+        case 'BallCollisionResponse': return accessor(index, new ball_collision_response_js_1.BallCollisionResponse());
         default: return null;
     }
 }
