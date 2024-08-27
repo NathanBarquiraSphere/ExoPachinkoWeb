@@ -12,6 +12,7 @@ import { TrailLengthRequest } from '../schema/epschema/trail-length-request';
 import { UseEmissiveResponse } from '../schema/epschema/use-emissive-response';
 import { PlayerTrailResponse } from '../schema/epschema/player-trail-response';
 import { TrailLengthResponse } from '../schema/epschema/trail-length-response';
+import { BallCollisionResponse } from '../schema/epschema/ball-collision-response';
 
 
 // similar to ENET client overrides.
@@ -159,6 +160,15 @@ export class NetworkingManager extends BaseNetworkingManager {
 
         this.emit(Message.TrailLengthResponse.toString(), trailLength);
     }
+    protected handleBallCollisionResponse(typeWrapper: TypeWrapper): void
+    {
+        console.log('received ball collision response')
+
+        const ballCollisionResponse = new BallCollisionResponse();
+        typeWrapper.message(ballCollisionResponse);
+
+        this.emit(Message.BallCollisionResponse.toString());
+    }
     // END MESSAGE HANDLERS
 
 
@@ -194,6 +204,11 @@ export class NetworkingManager extends BaseNetworkingManager {
             case Message.PlayerTrailResponse:
             {
                 this.handlePlayerTrailResponse(root);
+                break;
+            }
+            case Message.BallCollisionResponse:
+            {
+                this.handleBallCollisionResponse(root);
                 break;
             }
             default:

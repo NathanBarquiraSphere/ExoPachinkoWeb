@@ -41,6 +41,7 @@ import PlayerTrailCheckBox from "./components/PlayerTrailCheckBox";
 import TrailLengthSlider from "./components/TrailLengthSlider";
 import AcceptCertButtonExo from "./components/AcceptCertButtonExo";
 import IsConnectedWidget from "./components/IsConnectedWidget";
+import BallCollisionOverlay from "./components/BallCollisionOverlay";
 
 
 const UserInputKey = "UserInput";
@@ -119,6 +120,7 @@ const App = () => {
             
               <Box>
                 <IsConnectedWidget inNetworkingManager={networkingManager} />
+                {/* <ConnectWidget connectFunction={connectToServer} /> */}
                 <AcceptCertButtonExo />
                 <ConnectExoWidget connectFunction={connectToServer} />
                 <EmissiveCheckBox inNetworkingManager={networkingManager} />
@@ -131,6 +133,7 @@ const App = () => {
         </Grid>
       </section>
       <ColorSelector inNetworkingManager={networkingManager} />
+      <BallCollisionOverlay inNetworkingManager={networkingManager} />
     </Container>
   );
 
