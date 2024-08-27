@@ -12,7 +12,7 @@ const AcceptCertButtonExo = () => {
 
     const handleClick = () =>
     {
-        window.open("https://10.232.51.206:3004");
+        window.open("https://10.232.250.203:3004");
     }
 
     return (

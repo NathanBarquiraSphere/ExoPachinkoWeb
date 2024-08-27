@@ -15,7 +15,7 @@ interface ConnectToExoProps {
 const ConnectExoWidget = ({ connectFunction }: ConnectToExoProps) => {
 
   const tryConnectToExo = () => {
-    const fullAddress = "wss://10.232.51.206:3004";
+    const fullAddress = "wss://10.232.250.203:3004";
     connectFunction(fullAddress);
   };
 

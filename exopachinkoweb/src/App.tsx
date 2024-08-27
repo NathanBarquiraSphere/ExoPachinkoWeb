@@ -64,34 +64,10 @@ function storageAvailable(type) {
 }
 
 const App = () => {
-  const [drawResult, setDrawResult] = useState("No Match.");
-  const [score, setScore] = useState(0);
-  const [scoreText, setScoreText] = useState("Score: ");
-  const [textColor, setTextColor] = useState("red.500");
-  const [Recognizer] = useState<DollarRecognizer>(new DollarRecognizer());
-  const templateManager = new TemplateManager();
 
   // networking stuff
   const [networkingManager, setNetworkingManager] =
     useState<NetworkingManager | null>(null);
-
-  const HandleLineColor = (teamId: number) => {
-    console.log("received teamid = ", teamId, " from event emit");
-    switch (teamId) {
-      case 0: {
-        setTextColor("red.500");
-        break;
-      }
-      case 1: {
-        setTextColor("blue.500");
-        break;
-      }
-      default: {
-        setTextColor("yellow.500");
-        break;
-      }
-    }
-  };
 
   const setupNetworkingBindings = (inNetworkingManager: NetworkingManager) => {
     if (networkingManager) {
@@ -120,77 +96,7 @@ const App = () => {
 
   // Initialization when the component
   // mounts for the first time
-  useEffect(() => {
-    templateManager.LoadTemplates().then((result) => {
-      for (let i = 0; i < result.length; i++) {
-        Recognizer.AddGesture(result[i]);
-      }
-    });
-  });
-
-  // TODO maybe look into a more robust way to handle this...
-  const ShapeToEnum = {
-    Arrow: 0,
-    Parenthesis: 1,
-    Check: 2,
-    Triangle: 3,
-    Pigtail: 4,
-    Circle: 5,
-  };
-
-  // Function for ending the drawing
-  const endDrawing = () => {
-    let pointArray = new Array();
-
-    if (storageAvailable("localStorage")) {
-      if (!localStorage.getItem(UserInputKey)) {
-        return;
-      }
-      let existingInputString = localStorage.getItem(UserInputKey);
-
-      let existingInputObj = JSON.parse(existingInputString);
-
-      for (let i = 0; i < existingInputObj["Input"].length; i++) {
-        let X = existingInputObj["Input"][i]["x"];
-        let Y = existingInputObj["Input"][i]["y"];
-
-        let newPoint = new Point(X, Y);
-        pointArray.push(newPoint);
-      }
-    }
-
-    let DrawResult = Recognizer.Recognize(pointArray, false);
-
-    if (DrawResult.Score >= 0.5) {
-      let enumResult = ShapeToEnum[DrawResult.Name];
-      // sendShapeRequest(enumResult);
-      networkingManager?.sendShapeRequest(enumResult);
-      setDrawResult(DrawResult.Name);
-    } else {
-      setDrawResult("No Match.");
-    }
-  };
-
-  const AddTemplate = (TemplateName: string) => {
-    templateManager.SaveTemplate(TemplateName);
-  };
-
-  const AddScore = (x) => {
-    setScore(score + x);
-    setScoreText("Score: " + score);
-  };
-
-  const AddSetScore = () => {};
-
-  const selectHandle = (index: number) => {
-    setIndex(index);
-  };
-  const [_index, setIndex] = useState(0);
-  const inputTypes = [
-    <DrawingWidget drawEndFunction={endDrawing} inNetworkingManager={networkingManager} />,
-    <TilesInput inNetworkingManager={networkingManager} />,
-    <TapnSlashInput />,
-  ];
+  useEffect(() => {  });
 
   return (
     <Container className="App">
@@ -208,10 +114,9 @@ const App = () => {
             </Center>
           </GridItem>
 
-          <GridItem width="100%" maxW="100%" area="Connections" rowSpan={2} colSpan={5}>
+          <GridItem width="100%" maxW="100%" area="Connections" rowSpan={2} colSpan={5} mt="-2%">
             
               <Box>
-                <ConnectWidget connectFunction={connectToServer} />
                 <AcceptCertButtonExo />
                 <ConnectExoWidget connectFunction={connectToServer} />
                 <EmissiveCheckBox inNetworkingManager={networkingManager} />
