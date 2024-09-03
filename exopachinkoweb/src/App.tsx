@@ -42,6 +42,7 @@ import TrailLengthSlider from "./components/TrailLengthSlider";
 import AcceptCertButtonExo from "./components/AcceptCertButtonExo";
 import IsConnectedWidget from "./components/IsConnectedWidget";
 import BallCollisionOverlay from "./components/BallCollisionOverlay";
+import ZoneChoiceComponent from "./components/ZoneChoiceComponent";
 
 
 const UserInputKey = "UserInput";
@@ -51,24 +52,6 @@ const App = () => {
   // networking stuff
   const [networkingManager, setNetworkingManager] =
     useState<NetworkingManager | null>(null);
-
-   // QR Code stuff
-  const [urlZoneParams, setUrlZoneParams] = useState<string | null>("0");
-
-  const sendZoneParams = (inSendNetworkingManager: NetworkingManager) =>
-  {
-    const urlParsed = new URLSearchParams(window.location.search);
-    const zoneURL = urlParsed.get('zone');
-    setUrlZoneParams(zoneURL);
-
-    console.log('queried zone params = ', zoneURL);
-    
-    // sending zone info here...
-    if (zoneURL)
-    {
-      inSendNetworkingManager?.sendZoneRequest(+zoneURL);
-    }
-  }
   
   // networking function
   // to be passed in as a prop to a component
@@ -78,7 +61,6 @@ const App = () => {
       .connect()
       .then(() => {
         setNetworkingManager(newNetworkingManager);
-        sendZoneParams(newNetworkingManager);
       })
       .catch(() => {
         console.log("failed to connect");
@@ -110,6 +92,7 @@ const App = () => {
           <GridItem width="100%" maxW="100%" area="Connections" rowSpan={2} colSpan={5} mt="-2%">
             
               <Box>
+                <ZoneChoiceComponent inNetworkingManager={networkingManager} />
                 <IsConnectedWidget inNetworkingManager={networkingManager} />
                 <ConnectWidget connectFunction={connectToServer} />
                 <AcceptCertButtonExo />

@@ -56,7 +56,7 @@ export class BaseNetworkingManager extends EventEmitter {
             // socket bindings
             this.socket.onopen = () => 
             {
-                this.emit(Message.WebClientLoginResponse, true);
+                this.emit(Message.WebClientLoginResponse.toString(), true);
                 alert("Connected to websocket with ip = " + this.url);
                 console.log('base manager message = ', BaseNetworkingManager.websocketStatusEventName);
                 resolve();
