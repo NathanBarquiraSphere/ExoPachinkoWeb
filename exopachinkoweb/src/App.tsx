@@ -55,7 +55,7 @@ const App = () => {
    // QR Code stuff
   const [urlZoneParams, setUrlZoneParams] = useState<string | null>("0");
 
-  const sendZoneParams = () =>
+  const sendZoneParams = (inSendNetworkingManager: NetworkingManager) =>
   {
     const urlParsed = new URLSearchParams(window.location.search);
     const zoneURL = urlParsed.get('zone');
@@ -66,7 +66,7 @@ const App = () => {
     // sending zone info here...
     if (zoneURL)
     {
-      networkingManager?.sendZoneRequest(+zoneURL);
+      inSendNetworkingManager?.sendZoneRequest(+zoneURL);
     }
   }
   
@@ -78,7 +78,7 @@ const App = () => {
       .connect()
       .then(() => {
         setNetworkingManager(newNetworkingManager);
-        sendZoneParams();
+        sendZoneParams(newNetworkingManager);
       })
       .catch(() => {
         console.log("failed to connect");
