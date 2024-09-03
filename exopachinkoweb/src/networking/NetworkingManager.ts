@@ -13,7 +13,7 @@ import { UseEmissiveResponse } from '../schema/epschema/use-emissive-response';
 import { PlayerTrailResponse } from '../schema/epschema/player-trail-response';
 import { TrailLengthResponse } from '../schema/epschema/trail-length-response';
 import { BallCollisionResponse } from '../schema/epschema/ball-collision-response';
-
+import { ZoneRequest } from '../schema/epschema/zone-request';
 
 // similar to ENET client overrides.
 // just create the senders / message handlers here.
@@ -21,6 +21,26 @@ export class NetworkingManager extends BaseNetworkingManager {
 
 
     // START SENDERS
+    sendZoneRequest(inZoneId: number): void
+    {
+        const builder = new flatbuffers.Builder(256);
+
+        ZoneRequest.startZoneRequest(builder);
+        ZoneRequest.addSessionId(builder, this.sessionId);
+        ZoneRequest.addZoneId(builder, inZoneId);
+        const builtZoneRequest = ZoneRequest.endZoneRequest(builder);
+
+        TypeWrapper.startTypeWrapper(builder);
+        TypeWrapper.addMessageType(builder, Message.ZoneRequest);
+        TypeWrapper.addMessage(builder, builtZoneRequest);
+        const typeWrapper = TypeWrapper.endTypeWrapper(builder);
+
+        builder.finish(typeWrapper);
+
+        const buf = builder.asUint8Array();
+
+        this.socket?.send(buf);
+    }
     sendLinearColorRequest(inLinearColor: LinearColorObject): void
     {
         const builder = new flatbuffers.Builder(256);

@@ -35,6 +35,7 @@ var use_emissive_response_js_1 = require("../epschema/use-emissive-response.js")
 var web_client_login_request_js_1 = require("../epschema/web-client-login-request.js");
 var web_client_login_response_js_1 = require("../epschema/web-client-login-response.js");
 var web_client_logout_request_js_1 = require("../epschema/web-client-logout-request.js");
+var zone_request_js_1 = require("../epschema/zone-request.js");
 var Message;
 (function (Message) {
     Message[Message["NONE"] = 0] = "NONE";
@@ -69,6 +70,7 @@ var Message;
     Message[Message["TrailLengthRequest"] = 29] = "TrailLengthRequest";
     Message[Message["TrailLengthResponse"] = 30] = "TrailLengthResponse";
     Message[Message["BallCollisionResponse"] = 31] = "BallCollisionResponse";
+    Message[Message["ZoneRequest"] = 32] = "ZoneRequest";
 })(Message || (exports.Message = Message = {}));
 function unionToMessage(type, accessor) {
     switch (Message[type]) {
@@ -104,6 +106,7 @@ function unionToMessage(type, accessor) {
         case 'TrailLengthRequest': return accessor(new trail_length_request_js_1.TrailLengthRequest());
         case 'TrailLengthResponse': return accessor(new trail_length_response_js_1.TrailLengthResponse());
         case 'BallCollisionResponse': return accessor(new ball_collision_response_js_1.BallCollisionResponse());
+        case 'ZoneRequest': return accessor(new zone_request_js_1.ZoneRequest());
         default: return null;
     }
 }
@@ -141,6 +144,7 @@ function unionListToMessage(type, accessor, index) {
         case 'TrailLengthRequest': return accessor(index, new trail_length_request_js_1.TrailLengthRequest());
         case 'TrailLengthResponse': return accessor(index, new trail_length_response_js_1.TrailLengthResponse());
         case 'BallCollisionResponse': return accessor(index, new ball_collision_response_js_1.BallCollisionResponse());
+        case 'ZoneRequest': return accessor(index, new zone_request_js_1.ZoneRequest());
         default: return null;
     }
 }

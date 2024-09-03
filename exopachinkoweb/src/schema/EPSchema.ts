@@ -35,3 +35,4 @@ export { UseEmissiveResponse } from './epschema/use-emissive-response.js';
 export { WebClientLoginRequest } from './epschema/web-client-login-request.js';
 export { WebClientLoginResponse } from './epschema/web-client-login-response.js';
 export { WebClientLogoutRequest } from './epschema/web-client-logout-request.js';
+export { ZoneRequest } from './epschema/zone-request.js';

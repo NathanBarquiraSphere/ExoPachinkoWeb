@@ -46,50 +46,39 @@ import BallCollisionOverlay from "./components/BallCollisionOverlay";
 
 const UserInputKey = "UserInput";
 
-function storageAvailable(type) {
-  let storage;
-  try {
-    storage = window[type];
-    const x = "__storage_test__";
-    storage.setItem(x, x);
-    storage.removeItem(x);
-    return true;
-  } catch (e) {
-    return (
-      e instanceof DOMException &&
-      e.name === "QuotaExceededError" &&
-      // acknowledge QuotaExceededError only if there's something already stored
-      storage &&
-      storage.length !== 0
-    );
-  }
-}
-
 const App = () => {
 
   // networking stuff
   const [networkingManager, setNetworkingManager] =
     useState<NetworkingManager | null>(null);
 
-  const setupNetworkingBindings = (inNetworkingManager: NetworkingManager) => {
-    if (networkingManager) {
-      // networkingManager.addListener(
-      //   Message.MediaPlaneToMobileLoginResponse.toString(),
-      //   HandleLineColor
-      // );
-      console.log("setup bindings");
-    }
-  };
+   // QR Code stuff
+  const [urlZoneParams, setUrlZoneParams] = useState<string | null>("0");
 
+  const sendZoneParams = () =>
+  {
+    const urlParsed = new URLSearchParams(window.location.search);
+    const zoneURL = urlParsed.get('zone');
+    setUrlZoneParams(zoneURL);
+
+    console.log('queried zone params = ', zoneURL);
+    
+    // sending zone info here...
+    if (zoneURL)
+    {
+      networkingManager?.sendZoneRequest(+zoneURL);
+    }
+  }
+  
   // networking function
   // to be passed in as a prop to a component
   const connectToServer = (address: string) => {
     const newNetworkingManager = new NetworkingManager(address);
-    setupNetworkingBindings(newNetworkingManager);
     newNetworkingManager
       .connect()
       .then(() => {
         setNetworkingManager(newNetworkingManager);
+        sendZoneParams();
       })
       .catch(() => {
         console.log("failed to connect");
@@ -98,7 +87,9 @@ const App = () => {
 
   // Initialization when the component
   // mounts for the first time
-  useEffect(() => {  });
+  useEffect(() => 
+  {
+  }, []);
 
   return (
     <Container className="App">
