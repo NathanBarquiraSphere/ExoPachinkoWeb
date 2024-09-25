@@ -24,6 +24,10 @@ const ConnectWidget = ({ connectFunction }: ConnectWidgetProps) => {
     connectFunction(fullAddress);
   };
 
+  const tryAcceptCert = () => {
+    window.open("https://" + address + ":3004");
+  }
+
   return (
     <section className="ipcon">
       <div>
@@ -46,6 +50,9 @@ const ConnectWidget = ({ connectFunction }: ConnectWidgetProps) => {
             />
             <Button colorScheme="teal" onClick={tryConnect}>
               Connect
+            </Button>
+            <Button colorScheme="teal" onClick={tryAcceptCert}>
+              Cert
             </Button>
           </HStack>
         </div>
