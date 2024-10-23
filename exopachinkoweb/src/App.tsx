@@ -94,8 +94,8 @@ const App = () => {
               <Box>
                 <ZoneChoiceComponent inNetworkingManager={networkingManager} />
                 <IsConnectedWidget inNetworkingManager={networkingManager} />
-                <ConnectWidget connectFunction={connectToServer} />
-                <AcceptCertButtonExo />
+                {/* <ConnectWidget connectFunction={connectToServer} />
+                <AcceptCertButtonExo /> */}
                 <ConnectExoWidget connectFunction={connectToServer} />
                 <EmissiveCheckBox inNetworkingManager={networkingManager} />
                 <PlayerTrailCheckBox inNetworkingManager={networkingManager} />
